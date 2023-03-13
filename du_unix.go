@@ -1,4 +1,4 @@
-//go:build (darwin || dragonfly || freebsd || linux || nacl || netbsd || openbsd || solaris) && (amd64 || arm64 || ppc64 || ppc64le || riscv64 || loong64 || riscv64)
+//go:build darwin || dragonfly || freebsd || linux || nacl || netbsd || openbsd || solaris
 
 package du
 
@@ -12,8 +12,8 @@ func getUsage(path string) (*Info, error) {
 		return nil, err
 	}
 	return &Info{
-		Total:     stat.Bsize * int64(stat.Blocks),
-		Available: stat.Bsize * int64(stat.Bavail),
-		Free:      stat.Bsize * int64(stat.Bfree),
+		Total:     int64(stat.Bsize) * int64(stat.Blocks),
+		Available: int64(stat.Bsize) * int64(stat.Bavail),
+		Free:      int64(stat.Bsize) * int64(stat.Bfree),
 	}, nil
 }
