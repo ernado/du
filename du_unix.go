@@ -1,5 +1,4 @@
-//go:build darwin || dragonfly || freebsd || linux || nacl || netbsd || openbsd || solaris
-// +build darwin dragonfly freebsd linux nacl netbsd openbsd solaris
+//go:build (darwin || dragonfly || freebsd || linux || nacl || netbsd || openbsd || solaris) && (amd64 || arm64 || ppc64 || ppc64le || riscv64 || loong64 || riscv64)
 
 package du
 
