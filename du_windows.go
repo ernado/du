@@ -18,14 +18,14 @@ func getUsage(path string) (*Info, error) {
 	if err != nil {
 		return nil, err
 	}
-	i_, _, err = c.Call(
+	_, _, err = c.Call(
 		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(path))),
 		uintptr(unsafe.Pointer(&i.Free)),
 		uintptr(unsafe.Pointer(&i.Total)),
 		uintptr(unsafe.Pointer(&i.Available)),
 	)
 	ok := syscall.Errno(0)
-	if errors.Is(err, syscall.Errno(0)) {
+	if errors.Is(err, ok) {
 		err = nil
 	}
 	if err != nil {
