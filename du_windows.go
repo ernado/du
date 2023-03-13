@@ -3,6 +3,7 @@
 package du
 
 import (
+	"errors"
 	"syscall"
 	"unsafe"
 )
@@ -17,12 +18,17 @@ func getUsage(path string) (*Info, error) {
 	if err != nil {
 		return nil, err
 	}
-	if _, _, err := c.Call(
+	i_, _, err = c.Call(
 		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(path))),
 		uintptr(unsafe.Pointer(&i.Free)),
 		uintptr(unsafe.Pointer(&i.Total)),
 		uintptr(unsafe.Pointer(&i.Available)),
-	); err != nil {
+	)
+	ok := syscall.Errno(0)
+	if errors.Is(err, syscall.Errno(0)) {
+		err = nil
+	}
+	if err != nil {
 		return nil, err
 	}
 	return &i, nil
