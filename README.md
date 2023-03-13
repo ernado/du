@@ -6,16 +6,16 @@ Disk usage package for Go.
 package main
 
 import (
-    "fmt"
+	"fmt"
 	
-    "github.com/ernado/du"
+	"github.com/ernado/du"
 )
 
 func main() {
 	info, err := du.Get(".")
 	if err != nil {
-        panic(err)
-    }
+		panic(err)
+	}
 	fmt.Printf("%+v", info)
 }
 ```
